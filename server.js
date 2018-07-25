@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const body = require('body-parser');
-const main = require('./database/data/postgreSQL-main.js');
+// const main = require('./database/data/postgreSQL-main.js');
+const databaseController = require('./database/controller');
 // const eventController = require('./database/server/event-controller-model.js');
 
 app.use(body.json(), body.urlencoded({ extended: true }));
@@ -13,10 +14,10 @@ app.get('/', (req, res) => {
 });
 app.get('/login', (req, res) => {});
 
-app.post('/createUser', main.createUserEntry);
+app.post('/createUser', databaseController.createUserEntry);
 
 //**  add items to stock
-app.post('/addStock', main.addItemEntry);
+app.post('/addStock', databaseController.addItemEntry);
 
 //** get stock table
 app.get('/viewStock', () => {});
